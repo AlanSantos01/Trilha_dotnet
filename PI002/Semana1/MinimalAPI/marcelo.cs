@@ -22,8 +22,6 @@ public static class Marcelo{
             ("SQL Server", 1),
             ("ORM", 1),
             ("MVC", 1),
-
-
          };
            
       public static string View(){
