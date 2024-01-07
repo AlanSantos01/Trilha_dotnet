@@ -10,8 +10,8 @@ public static class Marcelo{
             ("Fundamentos de PHP", 2),
             ("ASP.NET Core Basics", 1),
             ("Redes de Computadores", 5),
-            ("Controle de Versão com o Git", 4),
-            ("GitHub", 4),
+            ("Controle de Versão com o Git", 4),            
+            ("GitHub", 5),
             ("GitLab", 1),
             ("Protocolos HTTP / HTTPS", 5),
             ("Design de Banco de Dados - Básico", 5),
@@ -20,7 +20,8 @@ public static class Marcelo{
             ("MariaDB", 4),
             ("MySQL", 4),
             ("SQL Server", 1),
-           ("ORM", 1)
+            ("ORM", 1),
+            ("MVC", 1),
 
 
          };
