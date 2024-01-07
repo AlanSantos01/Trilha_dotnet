@@ -18,11 +18,13 @@ public static class HomePage
         sb.AppendLine();
         sb.AppendLine($"Nome: {AlanCarlos.Name}");
         sb.AppendLine($"Total de estrelas: {AlanCarlos.Skills.Sum(x => x.Item2)}");
+        sb.AppendLine($"Marcelo: {Marcelo.Name}");
+        sb.AppendLine($"Total de estrelas: {Marcelo.Skills.Sum(x => x.Item2)}");
         sb.AppendLine();
         sb.AppendLine($"Nome: {Daniel.Name}");
         sb.AppendLine($"Total de estrelas: {Daniel.getSum()}");
         sb.AppendLine();
-        sb.AppendLine($"Total de estrelas da equipe: {Breno.getSum() + Ezequiel.getSum() + Franklin.Skills.Sum(x => x.Item2) + AlanCarlos.Skills.Sum(x => x.Item2) + Daniel.getSum()}");
+        sb.AppendLine($"Total de estrelas da equipe: {Breno.getSum() + Ezequiel.getSum() + Franklin.Skills.Sum(x => x.Item2) + AlanCarlos.Skills.Sum(x => x.Item2) + Marcelo.Skills.Sum(x => x.Item2) + Daniel.getSum()}");
 
         return sb.ToString();
     }
