@@ -37,7 +37,7 @@ app.Run();
 
 static void CreateDatabase(WebApplication app){
     var serviceScope = app.Services.CreateScope();
-    var datContex =serviceScope.ServiceProvider.GetService<AppDbContext>();
-    datContex?.Database.EnsureCreated();
+    var dataContex =serviceScope.ServiceProvider.GetService<AppDbContext>();
+    dataContex?.Database.EnsureCreated();
 
 }

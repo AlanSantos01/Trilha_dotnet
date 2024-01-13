@@ -1,6 +1,8 @@
+using CleanArchitecture.Application.Shared.Behavior;
 using CleanArchitecture.Domain.Interfaces;
 using CleanArchitecture.Persistence.Context;
 using CleanArchitecture.Persistence.Repositories;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,5 +16,7 @@ public static class ServiceExtensions
         services.AddDbContext<AppDbContext>(opt => opt.UseSqlite(connectionString));
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserRepository, UserRepository>();
+
+        services.AddTransient(typeof(IPipelineBehavior<,>),typeof(ValidationBehavior<,>));
     }
 } 
