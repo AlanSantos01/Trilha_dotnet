@@ -14,7 +14,15 @@ namespace CleanArchtecture.API.Controllers
         {
             _mediator = mediator;
         }
+        [HttpGet]
+        public async Task<ActionResult<List<GetAllUserResponse>>> GetAll(CancellationToken cancellationToken)
+        {
+           var response = await _mediator.Send(new GetAllUsersResponse(), cancellationToken);
+           return Ok(response);
+        }
 
+
+        
         [HttpPost] 
         public async Task<ActionResult<CreateUserResponse>> Create(CreateUserRequest request, CancellationToken cancellationToken)
         {
