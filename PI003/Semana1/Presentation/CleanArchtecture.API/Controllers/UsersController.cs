@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using CleanArchitecture.Application.UseCases.CreateUser;
-
-
 using CleanArchitecture.Application.UseCases.GetAllUser;
+using CleanArchitecture.Application.UseCases.UpdateUser;
 
 namespace CleanArchtecture.API.Controllers
 {
@@ -17,23 +16,34 @@ namespace CleanArchtecture.API.Controllers
         {
             _mediator = mediator;
         }
+
         [HttpGet]
         public async Task<ActionResult<List<GetAllUserResponse>>> GetAll(CancellationToken cancellationToken)
         {
-           var response = await _mediator.Send(new GetAllUserResponse(), cancellationToken);
-           return Ok(response);
+            var request = new GetAllUserRequest();  // Criar uma instância do pedido
+            var response = await _mediator.Send(request, cancellationToken);
+            return Ok(response);
         }
 
-
-        
-        [HttpPost] 
-        public async Task<ActionResult<CreateUserResponse>> Create(CreateUserRequest request, CancellationToken cancellationToken)
+        [HttpPost]
+        public async Task<ActionResult<CreateUserResponse>> Create([FromBody] CreateUserRequest request, CancellationToken cancellationToken)
         {
-            var validator = new CreateUserValidator();
-            var validationResult = await validator.ValidateAsync(request);
-            
-            if (validationResult.IsValid){
-                return BadRequest(validationResult.Errors);
+            // A validação do modelo será tratada automaticamente pelo ASP.NET Core
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var response = await _mediator.Send(request, cancellationToken);
+            return Ok(response);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<UpdateUserResponse>> Update(Guid id, UpdateUserRequest request, CancellationToken cancellationToken)
+        {
+            if (id != request.Id)
+            {
+                return BadRequest();
             }
 
             var response = await _mediator.Send(request, cancellationToken);
