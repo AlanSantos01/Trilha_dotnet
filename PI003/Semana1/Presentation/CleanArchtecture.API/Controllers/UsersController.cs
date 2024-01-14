@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using CleanArchitecture.Application.UseCases.CreateUser;
 
+
+using CleanArchitecture.Application.UseCases.GetAllUser;
+
 namespace CleanArchtecture.API.Controllers
 {
     [ApiController]
@@ -17,7 +20,7 @@ namespace CleanArchtecture.API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<GetAllUserResponse>>> GetAll(CancellationToken cancellationToken)
         {
-           var response = await _mediator.Send(new GetAllUsersResponse(), cancellationToken);
+           var response = await _mediator.Send(new GetAllUserResponse(), cancellationToken);
            return Ok(response);
         }
 
