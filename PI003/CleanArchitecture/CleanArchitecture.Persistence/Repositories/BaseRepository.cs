@@ -33,7 +33,7 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
         return await Context.Set<T>().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
-    public async Task<List<T>> GetAll(Guid id, CancellationToken cancellationToken)
+    public async Task<List<T>> GetAll(CancellationToken cancellationToken)
     {
         return await Context.Set<T>().ToListAsync(cancellationToken);
     }
