@@ -3,6 +3,7 @@ using CleanArchitecture.Persistence.Context;
 using CleanArchitecture.Persistence;
 using CleanArchitecture.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
+using CleanArchtecture.API.Extensions;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,11 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.configurePersistenceApp(builder.Configuration);
-
 builder.Services.ConfigureApplicationApp();
-
-
-builder.Services.AddControllers();
+builder.Services.ConfigureCorsPolicy();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -28,12 +26,12 @@ CreateDatabase(app);
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+
+app.UseCors();
 app.MapControllers();
 app.Run();
 
-
-
-app.Run();
 
 static void CreateDatabase(WebApplication app){
     var serviceScope = app.Services.CreateScope();
