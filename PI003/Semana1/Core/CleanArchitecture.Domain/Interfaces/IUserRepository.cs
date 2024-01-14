@@ -3,6 +3,7 @@ namespace CleanArchitecture.Domain.Interfaces;
 
 public interface IUserRepository : IBaseRepository<User>
 {
-     Task<User> GetByEmail(string email, CancellationToken cancellationToken);
+    Task<List<User>> GetAll(CancellationToken cancellationToken);
+    Task<User> GetByEmail(string email, CancellationToken cancellationToken);
 
 }
