@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{5E817016-A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.Persistence", "Infrastructure\Persistence\CleanArchitecture.Persistence.csproj", "{1B80FE67-2A02-485A-886F-3942369371B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.API", "Presentation\CleanArchitecture.API\CleanArchitecture.API.csproj", "{09E925EA-2826-4C72-942F-6F0D4E44C57A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.WebAPI", "Presentation\CleanArchitecture.API\CleanArchitecture.WebAPI.csproj", "{09E925EA-2826-4C72-942F-6F0D4E44C57A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.Tests", "Test\CleanArchitecture.Tests\CleanArchitecture.Tests.csproj", "{951F8E6F-2C75-4A3E-B6F8-B885A7CE7E4A}"
 EndProject
