@@ -48,6 +48,20 @@ namespace ResTIConnect.WebAPI.Controllers
             }
         }
 
+        [HttpGet("eventos")]
+        public IActionResult GetAll()
+        {
+            try
+            {
+                var eventos = _eventoService.GetAll();
+                return Ok(eventos);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
         [HttpPut("eventos/{id}")]
         public IActionResult Update(int id, [FromBody] NewEventoInputModel evento)
         {
