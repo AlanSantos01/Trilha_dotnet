@@ -7,7 +7,7 @@ namespace OrdemDeServico.WebAPI.Controllers.PrestadorDeServico;
 
 [ApiController]
 [Route("/api/v0.1/")]
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class PrestadorDeServicoController : ControllerBase
 {
     private readonly IPrestadorDeServicoService _prestadorDeServicoService;

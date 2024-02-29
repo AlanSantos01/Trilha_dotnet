@@ -33,7 +33,8 @@ public class ClienteService : IClienteService
             Usuario = new Usuario
             {
                 NomeUsuario = cliente.Usuario.NomeUsuario,
-                Senha = _hashedPassword
+                Senha = _hashedPassword,
+                Role = cliente.Usuario.Role
             },
             Nome = cliente.Nome,
             Email = cliente.Email,
@@ -65,6 +66,7 @@ public class ClienteService : IClienteService
             {
                 UsuarioId = cliente.UsuarioId,
                 NomeUsuario = cliente.Usuario.NomeUsuario,
+                Role = cliente.Usuario.Role
             },
             ClienteId = cliente.ClienteId,
             Nome = cliente.Nome,
@@ -108,7 +110,8 @@ public class ClienteService : IClienteService
             Usuario = new UsuarioViewModel
             {
                 UsuarioId = _cliente.UsuarioId,
-                NomeUsuario = _cliente.Usuario.NomeUsuario
+                NomeUsuario = _cliente.Usuario.NomeUsuario,
+                Role = _cliente.Usuario.Role
             },
             ClienteId = _cliente.ClienteId,
             Nome = _cliente.Nome,
@@ -126,14 +129,27 @@ public class ClienteService : IClienteService
 
         if (_clienteDb is not null)
         {
+            if (_context.Usuarios.Any(u => u.NomeUsuario == cliente.Usuario.NomeUsuario))
+            {
+                throw new UsuarioAlreadyExistsException();
+            }
+
+            var _usuario = _context.Usuarios.Find(_clienteDb.UsuarioId)!;
+
             var _hashedPassword = _authService.ComputeSha256Hash(cliente.Usuario.Senha);
-            _clienteDb.Usuario.NomeUsuario = cliente.Usuario.NomeUsuario;
-            _clienteDb.Usuario.Senha = _hashedPassword;
+
+            _usuario.NomeUsuario = cliente.Usuario.NomeUsuario;
+            _usuario.Role = cliente.Usuario.Role;
+            _usuario.Senha = _hashedPassword;
+            _context.Update(_usuario);
+
             _clienteDb.Nome = cliente.Nome;
             _clienteDb.Email = cliente.Email;
             _clienteDb.Telefone = cliente.Telefone;
             _enderecoService.Update(_clienteDb.EnderecoId, cliente.Endereco);
             _clienteDb.UpdatedAt = DateTime.UtcNow;
+
+            _context.Update(_clienteDb);
             _context.SaveChanges();
         }
     }
@@ -159,6 +175,7 @@ public class ClienteService : IClienteService
                 {
                     UsuarioId = cliente.UsuarioId,
                     NomeUsuario = cliente.Usuario.NomeUsuario,
+                    Role = cliente.Usuario.Role
                 },
                 ClienteId = cliente.ClienteId,
                 Nome = cliente.Nome,

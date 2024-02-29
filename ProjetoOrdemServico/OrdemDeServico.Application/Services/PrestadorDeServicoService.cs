@@ -34,6 +34,7 @@ public class PrestadorDeServicoService : IPrestadorDeServicoService
             {
                 NomeUsuario = prestadorDeServico.Usuario.NomeUsuario,
                 Senha = _hashedPassword,
+                Role = prestadorDeServico.Usuario.Role
             },
             Nome = prestadorDeServico.Nome,
             Especialidade = prestadorDeServico.Especialidade,
@@ -77,10 +78,24 @@ public class PrestadorDeServicoService : IPrestadorDeServicoService
             return;
         }
 
+        if (_context.Usuarios.Any(u => u.NomeUsuario == prestadorDeServico.Usuario.NomeUsuario))
+        {
+            throw new UsuarioAlreadyExistsException();
+        }
+
+        var _usuario = _context.Usuarios.Find(_prestadorDeServicoDb.UsuarioId)!;
+
         var _hashedPassword = _authService.ComputeSha256Hash(prestadorDeServico.Usuario.Senha);
 
+        _usuario.NomeUsuario = prestadorDeServico.Usuario.NomeUsuario;
+        _usuario.Role = prestadorDeServico.Usuario.Role;
+        _usuario.Senha = _hashedPassword;
+        _context.Update(_usuario);
+
         _prestadorDeServicoDb.Usuario.NomeUsuario = prestadorDeServico.Usuario.NomeUsuario;
+        _prestadorDeServicoDb.Usuario.Role = prestadorDeServico.Usuario.Role;
         _prestadorDeServicoDb.Usuario.Senha = _hashedPassword;
+
         _prestadorDeServicoDb.Nome = prestadorDeServico.Nome;
         _prestadorDeServicoDb.Especialidade = prestadorDeServico.Especialidade;
         _prestadorDeServicoDb.Telefone = prestadorDeServico.Telefone;
@@ -99,6 +114,7 @@ public class PrestadorDeServicoService : IPrestadorDeServicoService
             {
                 UsuarioId = prestadorDeServico.UsuarioId,
                 NomeUsuario = prestadorDeServico.Usuario.NomeUsuario,
+                Role = prestadorDeServico.Usuario.Role
             },
             PrestadorDeServicoId = prestadorDeServico.PrestadorDeServicoId,
             Nome = prestadorDeServico.Nome,
@@ -142,6 +158,7 @@ public class PrestadorDeServicoService : IPrestadorDeServicoService
             {
                 UsuarioId = _prestadorDeServicoDb.UsuarioId,
                 NomeUsuario = _prestadorDeServicoDb.Usuario.NomeUsuario,
+                Role = _prestadorDeServicoDb.Usuario.Role
             },
             PrestadorDeServicoId = _prestadorDeServicoDb.PrestadorDeServicoId,
             Nome = _prestadorDeServicoDb.Nome,
@@ -172,6 +189,7 @@ public class PrestadorDeServicoService : IPrestadorDeServicoService
                 {
                     UsuarioId = prestadorDeServico.UsuarioId,
                     NomeUsuario = prestadorDeServico.Usuario.NomeUsuario,
+                    Role = prestadorDeServico.Usuario.Role,
                 },
                 PrestadorDeServicoId = prestadorDeServico.PrestadorDeServicoId,
                 Nome = prestadorDeServico.Nome,

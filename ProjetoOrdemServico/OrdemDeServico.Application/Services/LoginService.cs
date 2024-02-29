@@ -11,7 +11,8 @@ public class LoginService : ILoginService
 {
     private readonly IAuthService _authService;
     private readonly OrdemDeServicoContext _context;
-    public LoginService(IAuthService authService, OrdemDeServicoContext context) {
+    public LoginService(IAuthService authService, OrdemDeServicoContext context)
+    {
         _authService = authService;
         _context = context;
     }
@@ -23,7 +24,7 @@ public class LoginService : ILoginService
             u.NomeUsuario == user.NomeUsuario && u.Senha == senhaCriptografada
         ) ?? throw new InvalidCredentialsException();
 
-        var token = _authService.GenerateJwtToken(user.NomeUsuario, "Admin");
+        var token = _authService.GenerateJwtToken(user.NomeUsuario, userDb.Role);
         return new LoginViewModel
         {
             NomeUsuario = user.NomeUsuario,

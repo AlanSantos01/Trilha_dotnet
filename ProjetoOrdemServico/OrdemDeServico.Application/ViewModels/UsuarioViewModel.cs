@@ -4,4 +4,5 @@ public class UsuarioViewModel
 {
     public required int UsuarioId { get; set; }
     public required string NomeUsuario { get; set; }
+    public required string Role { get; set; }
 }

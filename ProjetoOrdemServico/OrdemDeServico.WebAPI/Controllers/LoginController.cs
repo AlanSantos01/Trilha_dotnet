@@ -7,7 +7,7 @@ using OrdemDeServico.Infra.Auth;
 namespace OrdemDeServico.WebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v0.1/")]
     public class LoginController : ControllerBase
     {
         private readonly ILoginService _loginService;

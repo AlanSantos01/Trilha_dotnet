@@ -8,7 +8,7 @@ namespace OrdemDeServico.WebAPI.Controllers;
 
 [ApiController]
 [Route("/api/v0.1/")]
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class ClienteController : ControllerBase
 {
     private readonly IClienteService _clienteService;
