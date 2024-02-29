@@ -99,6 +99,7 @@ public class OrdemServicoService : IOrdemServicoService
                 {
                     UsuarioId = ordemServico.Cliente!.UsuarioId,
                     NomeUsuario = ordemServico.Cliente!.Usuario.NomeUsuario,
+                    Role = ordemServico.Cliente!.Usuario.Role
                 },
                 ClienteId = ordemServico.Cliente!.ClienteId,
                 Nome = ordemServico.Cliente!.Nome,
@@ -123,6 +124,7 @@ public class OrdemServicoService : IOrdemServicoService
                 {
                     UsuarioId = ordemServico.PrestadorDeServico!.UsuarioId,
                     NomeUsuario = ordemServico.PrestadorDeServico!.Usuario.NomeUsuario,
+                    Role = ordemServico.PrestadorDeServico!.Usuario.Role
                 },
                 PrestadorDeServicoId = ordemServico.PrestadorDeServico!.PrestadorDeServicoId,
                 Nome = ordemServico.PrestadorDeServico!.Nome,
